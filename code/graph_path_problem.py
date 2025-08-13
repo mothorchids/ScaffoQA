@@ -174,7 +174,7 @@ class GraphPathProblem:
         The path length is measured as the total length of the DNA sequences associated 
         with the nodes in the path.
 
-        .. todo:: This implementation is not optimal.
+        Todo: This implementation is not optimal.
 
         :param G: NetworkX directed graph.
         :param starting_point: Node from which the search begins.
@@ -214,7 +214,7 @@ class GraphPathProblem:
         The path length is measured as the total length of the DNA sequences associated 
         with the nodes in the path.
 
-        .. todo:: This implementation is not optimal.
+        Todo: This implementation is not optimal.
 
         :param G: NetworkX directed graph.
         :param starting_point: Node from which the search begins.

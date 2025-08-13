@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>graph_path_problem module &#8212; Project CEMRACS2025  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="graph_to_QUBO module" href="graph_to_QUBO.html" />
+    <link rel="prev" title="find_solution module" href="find_solution.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-graph_path_problem">
+<span id="graph-path-problem-module"></span><h1>graph_path_problem module<a class="headerlink" href="#module-graph_path_problem" title="Link to this heading">¶</a></h1>
+<p>graph_path_problem.py</p>
+<p>Defines the GraphPathProblem class to solve pathfinding tasks on directed graphs.
+The graph is derived from a typed De Bruijn graph, and a DNA sequence can be reconstructed by traversing a path within the graph.</p>
+<p>Author : Jui-Ting Lu</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">graph_path_problem.</span></span><span class="sig-name descname"><span class="pre">GraphPathProblem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph=&lt;class</span> <span class="pre">'networkx.classes.digraph.DiGraph'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_mer=0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to solve pathfinding tasks on directed graphs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.combine_DNA">
+<span class="sig-name descname"><span class="pre">combine_DNA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.combine_DNA" title="Link to this definition">¶</a></dt>
+<dd><p>Combines the DNA sequence of a node with an existing DNA string.</p>
+<p>Appends the DNA fragment from the given node to the existing sequence, taking
+into account the k-mer overlap length. If the sequences do not overlap
+correctly, an error message is printed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Current assembled DNA sequence. Can be empty on the first call.</p></li>
+<li><p><strong>v</strong> – Current node whose DNA fragment will be appended.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New DNA sequence obtained by combining <code class="docutils literal notranslate"><span class="pre">s</span></code> with the fragment at node <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.draw_graph">
+<span class="sig-name descname"><span class="pre">draw_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.draw_graph" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.find_longest_dna_path_dfs_from">
+<span class="sig-name descname"><span class="pre">find_longest_dna_path_dfs_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starting_point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.find_longest_dna_path_dfs_from" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the longest simple path starting from a given node using DFS.</p>
+<p>The path length is measured as the total length of the DNA sequences associated
+with the nodes in the path.</p>
+<p>Todo: This implementation is not optimal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – NetworkX directed graph.</p></li>
+<li><p><strong>starting_point</strong> – Node from which the search begins.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of nodes representing the longest path without repetitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.find_longest_dna_path_dfs_to">
+<span class="sig-name descname"><span class="pre">find_longest_dna_path_dfs_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finish_point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.find_longest_dna_path_dfs_to" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the longest simple path starting from a given node using DFS.</p>
+<p>The path length is measured as the total length of the DNA sequences associated
+with the nodes in the path.</p>
+<p>Todo: This implementation is not optimal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – NetworkX directed graph.</p></li>
+<li><p><strong>starting_point</strong> – Node from which the search begins.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of nodes representing the longest path without repetitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.find_longest_path_dfs">
+<span class="sig-name descname"><span class="pre">find_longest_path_dfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starting_point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.find_longest_path_dfs" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the longest simple path starting from a given node using DFS.</p>
+<p>The path length is defined as the number of nodes in the path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>starting_point</strong> – Node from which the search begins.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of nodes representing the longest path without repetitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.find_path_always_first_neighbor">
+<span class="sig-name descname"><span class="pre">find_path_always_first_neighbor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starting_point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.find_path_always_first_neighbor" title="Link to this definition">¶</a></dt>
+<dd><p>Finds a path in a graph starting from a given node, always following the first unvisited successor.</p>
+<p>The traversal stops when a node has no successors or when continuing would create a cycle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – NetworkX directed graph.</p></li>
+<li><p><strong>starting_point</strong> – Node from which the path traversal begins.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of nodes representing the traversed path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.recontruct_DNA">
+<span class="sig-name descname"><span class="pre">recontruct_DNA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_on_graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.recontruct_DNA" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruct the DNA sequence from a path of nodes in a graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path_on_graph</strong> – A list of nodes representing a path through the graph.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reconstructed DNA sequence.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.show_highlight_edges">
+<span class="sig-name descname"><span class="pre">show_highlight_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">highlight_edges</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.show_highlight_edges" title="Link to this definition">¶</a></dt>
+<dd><p>Create and visualize a graph, highlighting specific edges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>highlight_edges</strong> – List of edges to highlight, each represented as a pair of nodes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.show_solution">
+<span class="sig-name descname"><span class="pre">show_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.show_solution" title="Link to this definition">¶</a></dt>
+<dd><p>Display or process the given solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>solution</strong> (<em>str</em>) – Usually a bit string representing the solution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_path_problem.GraphPathProblem.update_edges_register">
+<span class="sig-name descname"><span class="pre">update_edges_register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.GraphPathProblem.update_edges_register" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="graph_path_problem.main">
+<span class="sig-prename descclassname"><span class="pre">graph_path_problem.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_path_problem.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Project CEMRACS2025</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="find_solution.html">find_solution module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">graph_path_problem module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph_to_QUBO.html">graph_to_QUBO module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html">utility module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">code</a><ul>
+      <li>Previous: <a href="find_solution.html" title="previous chapter">find_solution module</a></li>
+      <li>Next: <a href="graph_to_QUBO.html" title="next chapter">graph_to_QUBO module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Jui-Ting Lu.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/graph_path_problem.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -246,7 +246,56 @@ class GraphPathProblem:
         longest_path = []
         dfs(finish_point, [], set())
         return longest_path
-    
+
+    def remove_bubbles_keep_longest(self):
+        """
+        Detects bubbles in a directed graph and removes all but the longest path.
+        A bubble is defined as two or more vertex-disjoint paths between the same (s, t).
+        
+        :param G: NetworkX directed graph.
+        :return:  H (nx.DiGraph): Copy of G simplified (bubbles cleaned)
+        """
+        G = self.graph
+        H = G.copy()
+        def simple_path_from_v(H,u):
+            p = []
+            current = u
+            print(f" current _ ini = {current}")
+            if H.out_degree[current]==1 and H.in_degree[current]==1 :
+                print(f" current = {current}")
+                p.append(current)
+                s = list(H.successors(current))[0] 
+                current = s
+            return p   
+        def remove_bubbles_from_v(H,v):
+            nodes_to_remove = set()
+            if H.out_degree[v]>=2:
+                print(f"Treat {v} : {H.out_degree[v]} paths. ")
+                potential_paths = [
+                    p for s in H.successors(v)
+                    for p in [simple_path_from_v(H, s)]
+                    if len(p) >= 1
+                ]
+                print(f"Potential_paths : {potential_paths}")
+                
+                for i in range(len(potential_paths)):
+                    for j in range(i+1,len(potential_paths)):
+                        for vi in H.successors(potential_paths[i][-1]):
+                            if vi in H.successors(potential_paths[j][-1]):
+                                path_i = self.recontruct_DNA(potential_paths[i])
+                                path_j = self.recontruct_DNA(potential_paths[j])
+                                if len(path_i)>len(path_j):
+                                    nodes_to_remove.update(potential_paths[j])
+                                else :
+                                    nodes_to_remove.update(potential_paths[i])
+                H.remove_nodes_from(nodes_to_remove)
+            return H
+
+        for s in G.nodes:
+            if s in H.nodes:
+                H =  remove_bubbles_from_v(H,s)
+        
+        return H
 
 ##########################################################
 ##########################################################

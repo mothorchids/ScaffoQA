@@ -346,6 +346,31 @@ def find_biggest_component(G):
     largest_component = list_connected_compossant[0]
     SG = nx.subgraph(G, largest_component).copy()
     return SG
+
+def k_hop_neighborhood(G, node, k=1, include_self=True):
+    """
+    Returns the subgraph containing all nodes within k hops of a given node.
+
+    Parameters:
+    :param G: networkx.Graph
+    :param node : node in G. The central vertex.
+    :param k : Number of layers/hops to include. (int)
+    :param include_self : Whether to include the central node itself.
+
+    Returns:
+    - H : networkx.Graph
+        The induced subgraph of the k-hop neighborhood.
+    """
+    # Use BFS to get all nodes within k hops
+    nodes_within_k = nx.single_source_shortest_path_length(G, node, cutoff=k).keys()
+    
+    if not include_self:
+        nodes_within_k = [n for n in nodes_within_k if n != node]
+    
+    H = G.subgraph(nodes_within_k).copy()
+    return H
+
+
 ##########################################################
 ##########################################################
 ### Main

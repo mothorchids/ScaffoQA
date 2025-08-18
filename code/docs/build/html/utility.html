@@ -178,6 +178,22 @@ followed by a sequence line. Edges are described using ‘L:’ formatted links.
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="utility.k_hop_neighborhood">
+<span class="sig-prename descclassname"><span class="pre">utility.</span></span><span class="sig-name descname"><span class="pre">k_hop_neighborhood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_self</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.k_hop_neighborhood" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the subgraph containing all nodes within k hops of a given node.</p>
+<p>Parameters:
+:param G: networkx.Graph
+:param node : node in G. The central vertex.
+:param k : Number of layers/hops to include. (int)
+:param include_self : Whether to include the central node itself.</p>
+<p>Returns:
+- H : networkx.Graph</p>
+<blockquote>
+<div><p>The induced subgraph of the k-hop neighborhood.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="utility.main">
 <span class="sig-prename descclassname"><span class="pre">utility.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.main" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>

@@ -12,14 +12,11 @@ from networkx.exception import NetworkXNoCycle
 
 def reverse_complement(dna_sequence):
     """
-    @brief Returns the reverse complement of a DNA sequence.
+    Return the opposite sign as a string.
 
-    This function reverses the input DNA sequence and replaces each nucleotide
-    with its complement: A <-> T, C <-> G.
-
-    @param dna_sequence A string representing a DNA sequence (e.g., "ATCG").
-    @return A string representing the reverse complement of the input.
-    @throws ValueError If the input contains invalid nucleotides.
+    :param sign: A string, either '+' or '-'.
+    :return: '-' if input is '+', '+' if input is '-'.
+    :raises ValueError: If the input is not '+' or '-'.
     """
     dna_sequence = dna_sequence.strip().upper()
 
@@ -43,11 +40,11 @@ def reverse_complement(dna_sequence):
 
 def reverse_sign(sign):
     """
-    @brief Returns the opposite sign as a string.
+    Return the opposite sign as a string.
 
-    @param sign A string: either '+' or '-'.
-    @return '-' if input is '+', '+' if input is '-'.
-    @throws ValueError If the input is not '+' or '-'.
+    :param sign: A string, either '+' or '-'.
+    :return: '-' if input is '+', '+' if input is '-'.
+    :raises ValueError: If the input is not '+' or '-'.
     """
     if sign == "+":
         return "-"
@@ -58,12 +55,12 @@ def reverse_sign(sign):
 
 def add_node_with_metadata(G, node_id, sequence="", verbose=False):
     """
-    Adds a node with label and optional title to the graph.
+    Add a node with label and optional title to the graph.
 
-    @param G The graph (NetworkX MultiDiGraph).
-    @param node_id Node identifier.
-    @param sequence Optional sequence string to show as tooltip.
-    @param verbose Whether to print debug info.
+    :param G: The De Bruijn graph (NetworkX MultiDiGraph).
+    :param node_id: Node identifier.
+    :param sequence: Optional sequence string to show as tooltip.
+    :param verbose: Whether to print debug info.
     """
     if not G.has_node(node_id):
         G.add_node(node_id, label=node_id, title=sequence)
@@ -74,14 +71,14 @@ def add_node_with_metadata(G, node_id, sequence="", verbose=False):
 
 def edge_with_sign_exists(G, u, v, sign_begin, sign_end):
     """
-    @brief Check if an edge from u to v exists in G with matching signs.
+    Check if an edge from u to v exists in the graph with matching signs.
 
-    @param G A NetworkX graph.
-    @param u Source node.
-    @param v Target node.
-    @param sign_begin Expected sign at the start of the edge (e.g., '+' or '-').
-    @param sign_end Expected sign at the end of the edge.
-    @return True if such an edge exists, False otherwise.
+    :param G: The De Bruijn graph (NetworkX MultiDiGraph).
+    :param u: Source node.
+    :param v: Target node.
+    :param sign_begin: Expected sign at the start of the edge (e.g., '+' or '-').
+    :param sign_end: Expected sign at the end of the edge.
+    :return: True if such an edge exists, False otherwise.
     """
     if not G.has_edge(u, v):
         return False
@@ -95,38 +92,13 @@ def edge_with_sign_exists(G, u, v, sign_begin, sign_end):
             return True
     return False
 
-def add_de_bruijn_edge(G, v1, v2, s1, s2, verbose=False):
-    """
-    @brief Adds a pair of directed edges with opposite signs between two nodes.
-
-    Adds two directed edges to the De Bruijn graph G:
-    - One from v1 to v2 with signs (s1, s2)
-    - One from v2 to v1 with reversed signs
-
-    @param G A networkx DiGraph
-    @param v1 The source node of the first edge.
-    @param v2 The target node of the first edge.
-    @param s1 The sign at the start of the v1 → v2 edge ('+' or '-').
-    @param s2 The sign at the end of the v1 → v2 edge ('+' or '-').
-    @param verbose If True, print info and warnings.
-    """
-    # Optionally validate signs
-    if s1 not in {"+", "-"} or s2 not in {"+", "-"}:
-        raise ValueError(f"Invalid signs: s1={s1}, s2={s2}. Must be '+' or '-'.")
-    
-    if not edge_with_sign_exists(G, v1, v2, s1, s2):
-        G.add_edge(v1, v2, sign_begin=s1, sign_end=s2, label=s1+">"+s2)
-        G.add_edge(v2, v1, sign_begin=reverse_sign(s2), sign_end=reverse_sign(s1), label=reverse_sign(s2)+">"+reverse_sign(s1))
-        if verbose:
-            print(f"Added edges between {v1} and {v2} with signs {s1}, {s2}")
-
 def parse_de_bruijn_link(link):
     """
-    @brief Validates and parses a De Bruijn link string.
+    Validate and parse a De Bruijn link string.
 
-    @param link A string of the format 'L:<sign1>:<target>:<sign2>'.
-    @return Tuple (sign1, target, sign2).
-    @throws ValueError If the link is malformed.
+    :param link: A string of the format 'L:<sign1>:<target>:<sign2>'.
+    :return: Tuple containing (sign1, target, sign2).
+    :raises ValueError: If the link is malformed.
     """
     if not link:
         raise ValueError("Empty link string")
@@ -141,14 +113,41 @@ def parse_de_bruijn_link(link):
 
     return sign1, target, sign2
 
+def add_de_bruijn_edge(G, v1, v2, s1, s2, verbose=False):
+    """
+    Add a pair of directed edges with opposite signs between two nodes.
+
+    Adds two directed edges to the De Bruijn graph G:
+    - One from v1 to v2 with signs (s1, s2).
+    - One from v2 to v1 with reversed signs.
+    
+    :param G: The De Bruijn graph (NetworkX MultiDiGraph).
+    :param v1: The source node of the first edge.
+    :param v2: The target node of the first edge.
+    :param s1: The sign at the start of the v1 → v2 edge ('+' or '-').
+    :param s2: The sign at the end of the v1 → v2 edge ('+' or '-').
+    :param verbose: If True, print info and warnings.
+    """
+    # Optionally validate signs
+    if s1 not in {"+", "-"} or s2 not in {"+", "-"}:
+        raise ValueError(f"Invalid signs: s1={s1}, s2={s2}. Must be '+' or '-'.")
+    
+    if not edge_with_sign_exists(G, v1, v2, s1, s2):
+        G.add_edge(v1, v2, sign_begin=s1, sign_end=s2, label=s1+">"+s2)
+        G.add_edge(v2, v1, sign_begin=reverse_sign(s2), sign_end=reverse_sign(s1), label=reverse_sign(s2)+">"+reverse_sign(s1))
+        if verbose:
+            print(f"Added edges between {v1} and {v2} with signs {s1}, {s2}")
+
+
+
 def add_de_bruijn_edges(G, v, links, verbose=False):
     """
-    @brief Parses and adds multiple De Bruijn edges from a list of link strings.
+    Parse and add multiple De Bruijn edges from a list of link strings.
 
-    @param G A networkx DiGraph.
-    @param v The source node.
-    @param links A list of strings, each formatted as 'L:<sign1>:<target>:<sign2>'.
-    @param verbose If True, print info and warnings.
+    :param G: The De Bruijn graph (NetworkX MultiDiGraph).
+    :param v: The source node.
+    :param links: A list of strings, each formatted as 'L:<sign1>:<target>:<sign2>'.
+    :param verbose: If True, print info and warnings.
     """
     for link in links:
         try:
@@ -160,16 +159,15 @@ def add_de_bruijn_edges(G, v, links, verbose=False):
 
 def generate_de_bruijn_graph_from_fa(path, verbose=False):
     """
-    @brief Generates a directed De Bruijn MultiDiGraph from a sequence-based file.
+    Generate a directed De Bruijn MultiDiGraph from a sequence-based file.
 
     Parses a file (e.g., GFA-like) where each node is defined by a line starting with '>',
     followed by a sequence line. Edges are described using 'L:' formatted links.
 
-    @param path Path to the input file.
-    @param verbose If True, prints progress and debug information.
-    @return A NetworkX MultiDiGraph with nodes and signed De Bruijn edges.
+    :param path: Path to the input file.
+    :param verbose: If True, prints progress and debug information.
+    :return: A NetworkX MultiDiGraph with nodes and signed De Bruijn edges.
     """
-
     with open(path) as f:
         lines = f.read().splitlines()
 
@@ -219,14 +217,14 @@ def generate_de_bruijn_graph_from_fa(path, verbose=False):
 ##########################################################
 def save_graph_to_html(graph, filename, width='2000px', height='2000px', directed=True, notebook=False):
     """
-    @brief Saves a NetworkX graph as an interactive HTML visualization using pyvis.
+    Save a NetworkX graph as an interactive HTML visualization using pyvis.
 
-    @param G A NetworkX graph.
-    @param filename Base filename (without extension) to save the HTML file.
-    @param width Width of the visualization (default '2000px').
-    @param height Height of the visualization (default '2000px').
-    @param directed Whether the graph is directed (default True).
-    @param notebook Whether to enable Jupyter notebook mode (default False).
+    :param G: A NetworkX graph (e.g., nx.Graph, nx.DiGraph, nx.MultiDiGraph).
+    :param filename: Base filename (without extension) to save the HTML file.
+    :param width: Width of the visualization (default '2000px').
+    :param height: Height of the visualization (default '2000px').
+    :param directed: Whether the graph is directed (default True).
+    :param notebook: Whether to enable Jupyter notebook mode (default False).
     """
     nt = Network(directed=directed, notebook=notebook)
     #nt = Network(width, height, directed=directed, notebook=notebook)
@@ -242,16 +240,11 @@ def save_graph_to_html(graph, filename, width='2000px', height='2000px', directe
 
 def remove_isolated_nodes(G, verbose=False):
     """
-    @brief Remove all isolated nodes (degree 0) from a NetworkX graph.
-
-    This function identifies and removes all nodes that have no incoming or 
-    outgoing edges. Works with directed and undirected graphs, including 
-    MultiDiGraph and MultiGraph.
-
-    @param G A NetworkX graph (e.g., nx.Graph, nx.DiGraph, nx.MultiDiGraph).
-    @param verbose If True, prints the number and list of removed nodes.
-
-    @return None. The graph is modified in place.
+    Remove all isolated nodes (degree 0).
+    
+    :param G: A NetworkX graph (e.g., nx.Graph, nx.DiGraph, nx.MultiDiGraph).
+    :param verbose: If True, prints the number and list of removed nodes.
+    :return: None. The graph is modified in place.
     """
     isolated_nodes = [n for n in G.nodes() if G.degree(n) == 0]
     G.remove_nodes_from(isolated_nodes)
@@ -260,17 +253,17 @@ def remove_isolated_nodes(G, verbose=False):
 
 def convert_de_bruijn_to_digraph(G, verbose=False):
     """
-    @brief Convert a De Bruijn MultiDiGraph into a simplified directed graph with strand orientation.
+    Convert a De Bruijn MultiDiGraph into a simplified directed graph with strand orientation.
 
-    For each node in G, this function adds both the original node and its reverse complement.
+    For each node in the graph, this function adds both the original node and its reverse complement.
     Then, for each edge, it uses the 'sign_begin' and 'sign_end' attributes to determine whether
     to use the normal or complement form of the source and destination nodes.
 
     Nodes that remain isolated in the final graph are removed.
 
-    @param G Input De Bruijn graph (expected to be a MultiDiGraph).
-    @param verbose If True, prints debug messages.
-    @return A directed NetworkX graph (DiGraph) with strand-aware edges.
+    :param G: The De Bruijn graph (NetworkX MultiDiGraph).
+    :param verbose: If True, prints debug messages.
+    :return: A directional graph (NetworkX DiGraph).
     """
     DG = nx.DiGraph()
     DG.add_nodes_from(G.nodes(data=True))  # Copy original nodes with attributes
@@ -312,8 +305,8 @@ def find_and_print_cycles(G, verbose=True):
     """
     Finds and prints all simple cycles in the directed graph G.
 
-    @param G: NetworkX directed graph.
-    @param verbose: If True, prints cycles found; otherwise silent.
+    :param G: A NetworkX directed graph (e.g., nx.DiGraph, nx.MultiDiGraph).
+    :param verbose: If True, print info and warnings.
     """
     cycles = list(nx.simple_cycles(G))
     if not cycles:
@@ -328,12 +321,62 @@ def print_connected_components_info(G):
     """
     Prints the number of weakly and strongly connected components of a directed graph G.
     
-    @param G: A NetworkX directed graph.
+    :param G: A NetworkX directed graph (e.g., nx.DiGraph, nx.MultiDiGraph).
     """
+
     num_weak = nx.number_weakly_connected_components(G)
     num_strong = nx.number_strongly_connected_components(G)
     print(f"Number of weakly connected components: {num_weak}")
     print(f"Number of strongly connected components: {num_strong}")
+
+def find_biggest_component(G):
+    """
+    Finds the largest weakly connected component in a directed graph.
+
+    :param G: A NetworkX directed graph (`nx.DiGraph` or similar).
+    :return: A subgraph (`nx.DiGraph`) corresponding to the largest weakly connected component of G.
+
+    This function computes all weakly connected components in the graph `G`,
+    selects the largest one, and returns it as a new subgraph.
+    """
+    list_connected_compossant = sorted(
+        nx.weakly_connected_components(G), key=len, reverse=True
+    )  # Generate a sorted list of weakly connected components, largest first.
+
+    largest_component = list_connected_compossant[0]
+    SG = nx.subgraph(G, largest_component).copy()
+    return SG
+
+def k_hop_neighborhood(G, node, k=1, include_self=True):
+    """
+    Returns the subgraph containing all nodes within k hops of a given node.
+
+    Parameters
+    ----------
+    G : networkx.Graph
+        The input graph.
+    node : node in G
+        The central vertex.
+    k : int, optional
+        Number of layers/hops to include (default is 1).
+    include_self : bool, optional
+        Whether to include the central node itself (default is True).
+
+    Returns
+    -------
+    H : networkx.Graph
+        The induced subgraph of the k-hop neighborhood.
+    """
+    # Use BFS to get all nodes within k hops
+    nodes_within_k = nx.single_source_shortest_path_length(G, node, cutoff=k).keys()
+    
+    if not include_self:
+        nodes_within_k = [n for n in nodes_within_k if n != node]
+    
+    H = G.subgraph(nodes_within_k).copy()
+    return H
+
+
 ##########################################################
 ##########################################################
 ### Main

@@ -1,5 +1,10 @@
-*__pycache__**
-code/docs/Makefile
-code/docs/doctrees/*
-code/docs/make.bat
-code/docs/source/*
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Sphinx files
+build/
+source/
+Makefile
+make.bat

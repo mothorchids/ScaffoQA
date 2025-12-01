@@ -17,20 +17,10 @@ Usage:
 
 import numpy as np
 import argparse
-#import re, os
-# from qat.plugins import ScipyMinimizePlugin
 from qat.opt import QUBO
 from qat.qpus import get_default_qpu
 from qat.plugins import ScipyMinimizePlugin
-# from qat.core import Job
-# from itertools import product
-# import ast
 
-# Parameters
-#p_max = 9  # Set to desired maximum p
-#grid_res = 10  # Coarse grid resolution for p = 1
-#qpu = get_default_qpu()
-# Problem setup
 def main():
     parser = argparse.ArgumentParser(description="Find solution with QAOA")
     parser.add_argument("input_path", help="Path to the input file")

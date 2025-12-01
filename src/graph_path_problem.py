@@ -84,7 +84,7 @@ class GraphPathProblem:
 
         :param highlight_edges: List of edges to highlight, each represented as a pair of nodes.
         """
-        colors = ["r" for node in self.graph.nodes()]
+        colors = ["#CEF09D" for node in self.graph.nodes()]
         pos = nx.spring_layout(self.graph)
         default_axes = plt.axes(frameon=True)
         nx.draw_networkx(self.graph, node_color=colors, node_size=600, alpha=0.8, ax=default_axes, pos=pos)

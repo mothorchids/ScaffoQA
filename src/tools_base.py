@@ -1,11 +1,9 @@
-import networkx as nx
-from utility import *
-from reconstruit import *
 import matplotlib.pyplot as plt
 import numpy as np
-import pulp
-from ortools.sat.python import cp_model
 import matplotlib.colors as mcolors
+
+from utility import *
+from reconstruit import *
 
 def generate_colors(n):
     """Génère n couleurs distinctes en format hexadécimal"""

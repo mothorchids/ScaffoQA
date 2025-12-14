@@ -1,10 +1,5 @@
 import networkx as nx
 from utility import *
-import matplotlib.pyplot as plt
-import numpy as np
-import pulp
-from ortools.sat.python import cp_model
-
 
 def find_biggest_component(G):
     """

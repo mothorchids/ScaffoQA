@@ -8,4 +8,7 @@ src
    graph_path_problem
    graph_to_QUBO
    qubo_util
+   reconstruit
+   tools
+   tools_base
    utility

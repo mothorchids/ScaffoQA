@@ -46,6 +46,7 @@
  | <a href="#Q"><strong>Q</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
  
 </div>
@@ -76,8 +77,14 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.combine_DNA">combine_DNA() (graph_path_problem.GraphPathProblem method)</a>
+      <li><a href="tools_base.html#tools_base.check_path">check_path() (in module tools_base)</a>
 </li>
+      <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.combine_DNA">combine_DNA() (graph_path_problem.GraphPathProblem method)</a>
+
+      <ul>
+        <li><a href="reconstruit.html#reconstruit.combine_DNA">(in module reconstruit)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="utility.html#utility.convert_de_bruijn_to_digraph">convert_de_bruijn_to_digraph() (in module utility)</a>
@@ -106,7 +113,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="utility.html#utility.find_and_print_cycles">find_and_print_cycles() (in module utility)</a>
 </li>
-      <li><a href="utility.html#utility.find_biggest_component">find_biggest_component() (in module utility)</a>
+      <li><a href="reconstruit.html#reconstruit.find_biggest_component">find_biggest_component() (in module reconstruit)</a>
+
+      <ul>
+        <li><a href="utility.html#utility.find_biggest_component">(in module utility)</a>
+</li>
+      </ul></li>
+      <li><a href="reconstruit.html#reconstruit.find_longest_dna_path_dfs">find_longest_dna_path_dfs() (in module reconstruit)</a>
 </li>
       <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.find_longest_dna_path_dfs_from">find_longest_dna_path_dfs_from() (graph_path_problem.GraphPathProblem method)</a>
 </li>
@@ -115,9 +128,17 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.find_longest_path_dfs">find_longest_path_dfs() (graph_path_problem.GraphPathProblem method)</a>
+
+      <ul>
+        <li><a href="reconstruit.html#reconstruit.find_longest_path_dfs">(in module reconstruit)</a>
 </li>
+      </ul></li>
       <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.find_path_always_first_neighbor">find_path_always_first_neighbor() (graph_path_problem.GraphPathProblem method)</a>
+
+      <ul>
+        <li><a href="reconstruit.html#reconstruit.find_path_always_first_neighbor">(in module reconstruit)</a>
 </li>
+      </ul></li>
       <li>
     find_solution
 
@@ -131,6 +152,8 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tools_base.html#tools_base.generate_colors">generate_colors() (in module tools_base)</a>
+</li>
       <li><a href="utility.html#utility.generate_de_bruijn_graph_from_fa">generate_de_bruijn_graph_from_fa() (in module utility)</a>
 </li>
       <li><a href="qubo_util.html#qubo_util.get_qubo">get_qubo() (in module qubo_util)</a>
@@ -201,6 +224,12 @@
 </li>
         <li><a href="qubo_util.html#module-qubo_util">qubo_util</a>
 </li>
+        <li><a href="reconstruit.html#module-reconstruit">reconstruit</a>
+</li>
+        <li><a href="tools.html#module-tools">tools</a>
+</li>
+        <li><a href="tools_base.html#module-tools_base">tools_base</a>
+</li>
         <li><a href="utility.html#module-utility">utility</a>
 </li>
       </ul></li>
@@ -235,12 +264,33 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.recontruct_DNA">recontruct_DNA() (graph_path_problem.GraphPathProblem method)</a>
+      <li>
+    reconstruit
+
+      <ul>
+        <li><a href="reconstruit.html#module-reconstruit">module</a>
 </li>
-      <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.remove_bubbles_keep_longest">remove_bubbles_keep_longest() (graph_path_problem.GraphPathProblem method)</a>
+      </ul></li>
+      <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.recontruct_DNA">recontruct_DNA() (graph_path_problem.GraphPathProblem method)</a>
+
+      <ul>
+        <li><a href="reconstruit.html#reconstruit.recontruct_DNA">(in module reconstruit)</a>
+</li>
+      </ul></li>
+      <li><a href="tools_base.html#tools_base.recontruct_path">recontruct_path() (in module tools_base)</a>
+</li>
+      <li><a href="tools_base.html#tools_base.registre_edges">registre_edges() (in module tools_base)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tools_base.html#tools_base.registre_nodes">registre_nodes() (in module tools_base)</a>
+</li>
+      <li><a href="tools_base.html#tools_base.registre_pred_node">registre_pred_node() (in module tools_base)</a>
+</li>
+      <li><a href="tools_base.html#tools_base.registre_suc_node">registre_suc_node() (in module tools_base)</a>
+</li>
+      <li><a href="graph_path_problem.html#graph_path_problem.GraphPathProblem.remove_bubbles_keep_longest">remove_bubbles_keep_longest() (graph_path_problem.GraphPathProblem method)</a>
+</li>
       <li><a href="utility.html#utility.remove_isolated_nodes">remove_isolated_nodes() (in module utility)</a>
 </li>
       <li><a href="utility.html#utility.reverse_complement">reverse_complement() (in module utility)</a>
@@ -263,6 +313,28 @@
 </li>
       <li><a href="qubo_util.html#qubo_util.symetrize">symetrize() (in module qubo_util)</a>
 </li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    tools
+
+      <ul>
+        <li><a href="tools.html#module-tools">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    tools_base
+
+      <ul>
+        <li><a href="tools_base.html#module-tools_base">module</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 

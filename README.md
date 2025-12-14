@@ -6,7 +6,7 @@ This work was developed during the [**CEMERACS**](https://cemracs2025.math.cnrs.
 
 ## Documentation 
 
-Location of the documentation: ```documentation```.
+Location of the documentation: ```documentation/index.html```.
 
 ## Examples of usage
 
@@ -28,25 +28,21 @@ Notes:
 ## Structure
 ```
 ├── README.md
-├── example.ipynb
-├── decomposition_genome_k_121.ipynb
-├── longest_path_genom.ipynb
+├── example1_pathfinding_with_QAOA.ipynb
+├── example2_pathfinding_ortools.ipynb
+├── example3_decomposition_genome_k_121.ipynb
 ├── documentation
-│   ├── index.html
-│   └── utility.html
-├── src
-│   ├── find_solution.py
-│   ├── graph_path_problem.py
-│   ├── graph_to_QUBO.py
-│   ├── qubo_util.py
-│   ├── reconstruit.py  
-│   ├── tools.py
-│   ├── tools_base.py
-│   └── utility.py
+│   └── index.html
 ├── input
 │   └── spneumoniae_k_121.unitigs.fa
-└──  output
-   ├── graph_genom_longest_path.html
-   └── graph_genome_de-Bruijn.html
-
+└── src
+    ├── find_solution.py
+    ├── graph_path_problem.py
+    ├── graph_to_QUBO.py
+    ├── __pycache__
+    ├── qubo_util.py
+    ├── reconstruit.py
+    ├── tools_base.py
+    ├── tools.py
+    └── utility.py
 ```

@@ -3,4 +3,11 @@ __pycache__/
 *.pyc
 *.pyo
 
+
 lib/
+
+# Sphinx files
+build/
+source/
+Makefile
+make.bat

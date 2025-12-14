@@ -3,8 +3,3 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Sphinx files
-build/
-source/
-Makefile
-make.bat
